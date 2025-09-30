@@ -1,4 +1,4 @@
-# api/result.py  -- smoke-test handler
+# api/result.py  -- SMOKE TEST
 import json, os, traceback
 
 def handler(request):
@@ -7,9 +7,9 @@ def handler(request):
             "ok": True,
             "note": "smoke test ok",
             "cwd": os.getcwd(),
-            "files": [f for f in os.listdir(os.getcwd())][:20]
+            "files": sorted(os.listdir(os.getcwd()))[:50]
         }
-        return (json.dumps(info), 200, {"Content-Type": "application/json"})
+        return (json.dumps(info), 200, {"Content-Type":"application/json"})
     except Exception as e:
         tb = traceback.format_exc()
         print("SMOKE ERROR", tb)
